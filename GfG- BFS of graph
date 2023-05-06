@@ -1,0 +1,37 @@
+// T.C. = O(V + E)    S.C. = O(V)
+
+class Solution {
+    // Function to return BFS of given Directed graph.
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        //to store visited or unvisited status of each node
+        HashMap<Integer, Boolean> visitedMap = new HashMap<Integer, Boolean>();
+        
+        // initializing all vertices as not visited
+        for (int i = 0; i < V; i++) 
+            visitedMap.put(i, false);
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.add(0);
+        visitedMap.put(0, true);
+        
+        while(q.isEmpty() == false){
+            int frontNode = q.peek();
+            q.remove();
+            //we can add the frontNode in ans
+            ans.add(frontNode);
+            
+            //to taverse the neighbours of frontNode
+            for(int neighbour : adj.get(frontNode)){
+                
+                if(visitedMap.get(neighbour) == false){
+                    q.add(neighbour);
+                    visitedMap.put(neighbour, true);
+                }
+            }
+        }
+            
+        return ans;
+    }
+}
