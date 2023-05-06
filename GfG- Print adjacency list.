@@ -1,3 +1,5 @@
+// T.C. = O(V + E)      S.C. = O(V + E)
+
 class Solution {
     // Function to return the adjacency list for each vertex.
     public ArrayList<ArrayList<Integer>> printGraph(
