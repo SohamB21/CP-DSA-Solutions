@@ -1,11 +1,10 @@
 // Using DFS => T.C. = O(V + E)    S.C. = O(V)
-
 class Solution
 {
     //stack to store topo sort
     Stack<Integer> s = new Stack<>();
     
-    //Function to return list of vertices in Topological order using DFS. 
+    //Function to return list of vertices in Topological order using DFS
     int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
         //to store visited or unvisited status of each node
@@ -33,5 +32,44 @@ class Solution
         }
         //we must push the node after its dfs call
         s.push(node);
+    }
+}
+
+// Using BFS (Kahn's Algorithm) => T.C. = O(V + E)    S.C. = O(V)
+class Solution
+{
+    //Function to return list of vertices in Topological order using BFS
+    //Kahn's Algo
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
+    {
+        //to calculate indegrees of each node
+        int inDegree[] = new int[V];
+        for(int i=0; i<V; i++){
+            for(int j : adj.get(i))
+                ++inDegree[j];
+        }
+        
+        //push nodes in q with 0 inDegree
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0; i<V; i++){
+            if(inDegree[i] == 0)
+                q.add(i);
+        }
+    
+        //to store answer
+        int ans[] = new int[V];
+        int index = 0;
+        while(!q.isEmpty()){
+            int front = q.remove();
+            ans[index++] = front;
+            
+            for(int neighbour : adj.get(front)){
+                --inDegree[neighbour];
+                if(inDegree[neighbour] == 0)
+                    q.add(neighbour);
+            }
+        }
+        
+        return ans;
     }
 }
