@@ -1,0 +1,42 @@
+// T.C. = O(n + m)    S.C. = O(n)   (Using BFS)
+
+class Solution {
+    public int[] shortestPath(int[][] edges,int n,int m,int src) {
+        
+        // create adjacency list
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<ArrayList<Integer>>();
+        for(int i=0; i<n; i++){
+            adj.add(new ArrayList<Integer>());
+        }
+        for(int edge[] : edges){
+            int u = edge[0], v = edge[1];
+            adj.get(u).add(v);
+            adj.get(v).add(u);
+        }
+        
+        //to store distance or edge count
+        int[] distance = new int[n];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+        
+        //to use the fifo functionality
+        Queue<Integer> q = new LinkedList<>();
+        q.add(src);
+        distance[src] = 0;
+        
+        while(!q.isEmpty()){
+            int front = q.remove();
+            for(int neighbour : adj.get(front))
+                if(distance[neighbour] > distance[front]+1){
+                    distance[neighbour] = distance[front]+1;
+                    q.add(neighbour);
+                }
+        }
+        
+        //prepare distance count of each node
+        for(int i=0; i<n; i++)
+            if(distance[i] == Integer.MAX_VALUE)
+                distance[i] = -1;
+        
+        return distance;
+    }
+}
