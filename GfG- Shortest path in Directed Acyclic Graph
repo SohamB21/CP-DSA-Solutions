@@ -1,0 +1,55 @@
+//Using BFS => T.C. = O(N+E)    S.C. = O(N)
+
+class Solution {
+    class Pair{
+        int v;
+        int w;
+        Pair(int dest, int dist){
+            this.v = dest;
+            this.w = dist;
+        }
+    }
+	public int[] shortestPath(int N,int M, int[][] edges) {
+		//to create the adj list of the weighted graph
+		ArrayList<ArrayList<Pair>> adj = new ArrayList<ArrayList<Pair>>();
+		for(int i=0; i<N; i++){
+		    adj.add(new ArrayList<>());
+		}
+		for(int i=0; i<M; i++){
+		    int u = edges[i][0];
+		    int v = edges[i][1];
+		    int w = edges[i][2];
+		    
+		    adj.get(u).add(new Pair(v, w));
+		}
+		
+		Queue<Integer> q = new LinkedList<>();
+		//add src in q
+		q.add(0);
+		
+		int distance[] = new int[N];
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		//distance of src from src is 0
+		distance[0] = 0;
+		
+		while(!q.isEmpty()){
+		    int front = q.remove();
+		    
+		    for(Pair p : adj.get(front)){
+		        int v = p.v;
+		        int w = p.w;
+		        if(distance[v] > distance[front] + w){
+		            distance[v] = distance[front] + w;
+		            q.add(v);
+		        }
+		    }
+		}
+		//-1 for the nodes which are impossible to reach
+		//as per the question
+        for(int i=0; i<N; i++){
+           if(distance[i] == Integer.MAX_VALUE)
+                distance[i] = -1;
+        }
+        return distance;
+	}
+}
