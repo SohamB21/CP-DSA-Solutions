@@ -1,0 +1,16 @@
+// T.C. = O(log N) S.C. = O(1)
+class Solution{
+    static int evenlyDivides(int N){
+        // code here
+        int count = 0, num = N;
+        while(N > 0){
+            int lastDigit = N%10;
+            
+            if(lastDigit != 0 && num%lastDigit == 0)
+                ++count;
+                
+            N = N/10;
+        }
+        return count;
+    }
+}
