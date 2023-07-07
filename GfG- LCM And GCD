@@ -1,0 +1,16 @@
+// T.C. = O() S.C. = O(1)
+class Solution {
+    static Long[] lcmAndGcd(Long A , Long B) {
+        long gcd = findGCD(A, B);
+        long lcm = (A*B)/gcd;
+        Long ans[] = {lcm, gcd};
+        return ans;
+        
+    }
+    static long findGCD(Long A, Long B){
+        //calculating gcd by Euclidean algorithm
+        if(B == 0)
+            return A;
+        return findGCD(B, A%B);
+    }
+}
