@@ -1,0 +1,32 @@
+// T.C. = O(log X) S.C. = O(1)
+class Solution {
+    static Long reversedBits(Long X) {
+        //decimal to binary
+        String binary = "";
+        if(X == 0)
+            binary = "0";
+        else{
+            while(X>0){
+                binary = X%2 + binary;
+                X = X/2;
+            }
+        }
+        while(binary.length() < 32)
+            binary = "0" + binary;
+        
+        //reversing binary
+        String revBinary = "";
+        for(int i = 0; i<binary.length(); i++)
+            revBinary = binary.charAt(i) + revBinary;
+        
+        //binary to decimal
+        long ans = 0;
+        int power = 0;
+        for(int i=binary.length()-1; i>=0; i--){
+            if(revBinary.charAt(i) == '1')
+                ans = ans + (long)Math.pow(2, power);
+            power++;
+        }
+        return ans;
+    }
+};
