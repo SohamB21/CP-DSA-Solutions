@@ -1,0 +1,10 @@
+// T.C. = O(N) S.C. = O(1)
+class Solution {
+    static long sumOfDivisors(int N) {
+        long ans = 0;
+        for (int i = 1; i <= N; i++) {
+            ans = ans + i*(N/i);
+        }
+        return ans;
+    }
+}
