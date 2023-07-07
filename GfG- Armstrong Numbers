@@ -1,0 +1,16 @@
+// T.C. = O(1) S.C. = O(1)
+class Solution {
+    static String armstrongNumber(int n){
+        // code here
+        int num = n, temp = 0, digit;
+        while(n>0){
+            digit = n%10;
+            temp = temp + (int)Math.pow(digit, 3);
+            n = n/10;
+        }
+        if(num == temp)
+            return "Yes";
+        else
+            return "No";
+    }
+}
