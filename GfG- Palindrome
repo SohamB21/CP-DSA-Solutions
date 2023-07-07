@@ -1,0 +1,18 @@
+// T.C. = O(1) S.C. = O(1)
+
+class Solution
+{
+    public String is_palindrome(int n)
+    {
+        int temp = n, rev = 0, remainder;
+        while(n>0){
+            remainder = n%10;
+            rev = (rev*10) + remainder;
+            n = n/10;
+        }
+        if(temp == rev)
+            return "Yes";
+        else
+            return "No";
+    }
+}
