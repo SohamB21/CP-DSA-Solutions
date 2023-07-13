@@ -1,0 +1,10 @@
+// T.C. = O(N) S.C. = O(N)
+class Solution {
+    void printNos(int N) {
+        // base case
+        if(N == 0)
+            return;
+        System.out.print(N + " ");
+        printNos(N - 1);
+    }
+}
