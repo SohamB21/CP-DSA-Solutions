@@ -1,0 +1,12 @@
+// T.C. = O(n) S.C. = O(n)
+public class Solution {
+    public static int sumFirstN(int n) {
+        // base case
+        if(n == 0)
+            return 0;
+        return (n + sumFirstN(n - 1));
+        /* In O(1) complexity...
+        int ans = (n*(n+1)) / 2;
+        return ans; */
+    }
+}
