@@ -1,0 +1,9 @@
+// T.C. = O(N)   S.C. = O(N)
+class Solution{
+    static long factorial(int N){
+        // base case
+        if(N == 0)
+            return 1;
+        return (factorial(N-1) * N);
+    }
+}
