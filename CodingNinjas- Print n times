@@ -1,0 +1,11 @@
+// T.C. = O(n) S.C. = O(n)
+import java.util.List;
+public class Solution {
+    public static void printNtimes(int n){
+        // base case
+        if(n == 0)
+            return;
+        printNtimes(n - 1);
+        System.out.print("Coding Ninjas ");
+    }
+}
