@@ -1,0 +1,17 @@
+// T.C. = O(n)    S.C. = O(1)
+class Solution {
+    //Function to reverse every sub-array group of size k.
+    void reverseInGroups(ArrayList<Integer> arr, int n, int k) {
+        for(int i=0; i<n; i=i+k){
+            reverse(i, Math.min(i+k-1, n-1), arr);
+        }
+    }
+    void reverse(int start, int end, ArrayList<Integer> arr) {
+        while(start < end){
+            int temp = arr.get(start);
+            arr.set(start, arr.get(end));
+            arr.set(end, temp);
+            start++; end--;
+        }
+    }
+}
