@@ -1,0 +1,22 @@
+// T.C. = O(size^2)    S.C. = O(size)
+public class Solution {
+    public static void insertionSort(int arr[], int size) {
+        //base case
+        if(size==0 || size==1)
+            return;
+        
+        //recursive statement
+        insertionSort(arr, size-1);
+        
+        int newCard = arr[size - 1];
+        int i = size - 2;
+        
+        while(i>=0 && arr[i]>newCard){
+            arr[i+1] = arr[i];
+            i--;
+        }
+
+        //inserting card at its correct position
+        arr[i+1] = newCard;
+    }
+}
