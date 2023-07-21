@@ -1,0 +1,47 @@
+// T.C. = O(nlogn)    S.C. = O(logn)
+public class Solution {
+	
+	public static void quickSort(int arr[], int start, int end) {
+		if(start >= end)
+			return;
+		
+		//for partitioning
+		int p = partition(arr, start, end);
+		//left part sort
+		quickSort(arr, start, p-1);
+		//right part sort
+		quickSort(arr, p+1, end);
+	}
+	static int partition(int arr[], int start, int end){
+		int pivot = arr[start];
+		int k, count = 0;
+
+		//counting elements lesser than pivot
+		for(k=start+1; k<=end; k++)
+			if(arr[k] <= pivot)
+				++count;
+
+		//putting pivot at its correct position
+		int temp, pivotIndex = start+count;
+		temp = arr[pivotIndex];
+		arr[pivotIndex] = pivot;
+		arr[start] = temp;
+
+		//putting smaller in left and larger in right
+		int i = start, j = end;
+		while(i<pivotIndex && j>pivotIndex){
+			while(i<pivotIndex && arr[i] <= pivot)
+				i++;
+			while(j>pivotIndex && arr[j] > pivot)
+				j--;
+			if(i<pivotIndex && j>pivotIndex){
+				temp = arr[j];
+				arr[j] = arr[i];
+				arr[i] = temp;
+				i++; j--;
+			}
+		}
+
+		return pivotIndex;
+	}
+}
