@@ -1,0 +1,46 @@
+// T.C. = O(nlogn)    S.C. = O(n)
+public class Solution {
+
+    public static void mergeSort(int arr[], int l, int r){
+        if(l >= r)
+            return;
+        int mid = (l+r)/2;
+        //left part
+        mergeSort(arr, l, mid);
+        //right part
+        mergeSort(arr, mid+1, r);
+        //merge
+        merge(arr, l, r);
+    }
+    public static void merge(int arr[], int l, int r){
+        int mid = (l+r)/2;
+        int len1 = mid-l+1, len2 = r-mid;
+        int k, arrayIndex = l;
+
+        //arrays to store left and right part
+        int first[] = new int[len1];
+        int second[] = new int[len2];
+
+        //copying values of left and right part
+        for(k=0; k<len1; k++)
+            first[k] = arr[arrayIndex++];
+        for(k=0; k<len2; k++)
+            second[k] = arr[arrayIndex++];
+
+        //sorting values of both parts
+        int i1=0, i2=0;
+        arrayIndex = l;
+        while(i1<len1 && i2<len2){
+            if(first[i1] < second[i2])
+                arr[arrayIndex++] = first[i1++];
+            else
+                arr[arrayIndex++] = second[i2++];
+        }
+
+        //if one array is longer than other
+        while(i1<len1)
+            arr[arrayIndex++] = first[i1++];
+        while(i2<len2)
+            arr[arrayIndex++] = second[i2++];
+    }
+}
