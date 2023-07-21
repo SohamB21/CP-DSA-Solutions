@@ -1,0 +1,22 @@
+// T.C. = O(n^2)    S.C. = 0(n)
+class Solution
+{
+  //Sort the array using recursive bubble sort algorithm
+	public static void bubbleSort(int arr[], int n)
+    {
+        //base case
+        if(n==0 || n==1)
+            return;
+        
+        int i, temp;
+        for(i=0; i<n-1; i++){
+            if(arr[i+1] < arr[i]){
+                temp = arr[i+1];
+                arr[i+1] = arr[i];
+                arr[i] = temp;
+            }
+        }
+        
+        bubbleSort(arr, n-1);
+    }
+}
