@@ -1,0 +1,17 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    int print2largest(int arr[], int n) {
+        int i, largest, larger;
+        larger = largest = -1;
+        
+        for(i=0; i<n; i++){
+            if(arr[i] > largest){
+                larger = largest;
+                largest = arr[i];
+            }
+            if(arr[i]>larger && arr[i]<largest)
+                larger = arr[i];
+        }
+        return larger;
+    }
+}
