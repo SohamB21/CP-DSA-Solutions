@@ -1,0 +1,18 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    public boolean check(int nums[]) {
+        int i, n = nums.length, count = 0;
+        for(i=1; i<n; i++){
+            if(nums[i] < nums[i-1])
+                count++;
+        }
+        //totally sorted. non rotated case
+        if(count == 0)
+            return true;
+        //0th and (n-1)th relation, rotated case
+        if(count == 1 && nums[0] >= nums[n-1])
+            return true;
+        
+        return false;
+    }
+}
