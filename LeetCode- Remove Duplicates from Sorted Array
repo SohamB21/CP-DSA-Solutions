@@ -1,0 +1,29 @@
+// T.C. = 0(n)    S.C. = O(1)    Optimal 2 Pointers Approach
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int i = 0, j, n = nums.length;
+        for(j=1; j<n; j++){
+            if(nums[i] != nums[j])
+                nums[++i] = nums[j];
+        }
+        return i+1;
+    }
+}
+// T.C. = 0(n * logn)    S.C. = O(n)    Brute Force Approach
+import java.util.SortedSet;
+import java.util.TreeSet;
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        SortedSet<Integer> set = new TreeSet<Integer>();
+        int n = nums.length, k = 0;
+        
+        for(int i=0; i<n; i++){
+            set.add(nums[i]);
+        }
+        for(int i : set){
+            nums[k] = i;
+            ++k;
+        }
+        return k;
+    }
+}
