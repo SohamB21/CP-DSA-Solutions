@@ -1,0 +1,34 @@
+// T.C. = O(n)      S.C. = O(1)     //Optimized Approach
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k= k % n; //optimizing by performing effective no.of rotations only
+        
+        reverse(nums, 0, n-1); //reversing whole array
+        reverse(nums, 0, k-1); //reversing first -> (k-1) elements
+        reverse(nums, k, n-1); //reversing k -> last elements
+    }
+    void reverse(int nums[], int start, int end){
+        while(start < end){
+            int temp = nums[end];
+            nums[end] = nums[start];
+            nums[start] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+//T.C. = O(k * n)      S.C. = O(1)     //Brute Force
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k= k % n; //optimizing by performing effective no.of rotations only
+        while(k > 0){
+            int temp = nums[n-1];
+            for(int i=n-2; i>=0; i--)
+                nums[i+1] = nums[i];
+            nums[0] = temp;
+            --k;
+        }
+    }
+}
