@@ -1,0 +1,15 @@
+// T.C. = O(N)      S.C. = O(1)    Linear Search
+class Solution{
+    static int search(int arr[], int N, int X)
+    {
+        int i, flag = -1;
+        for(i=0; i<N; i++){
+            if(arr[i] == X){
+                flag = i;
+                break;
+            }
+        }
+        return flag;
+    }
+    
+}
