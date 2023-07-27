@@ -1,0 +1,17 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int k, i = 0, j = 0, count = 0, n = nums.length;
+        for(k=0; k<n; k++){
+            if(nums[k] == 1){
+                j++;
+                count = (j-i)>count ? (j-i) : count;
+            }
+            else{
+                i = k+1;
+                j = i;
+            }
+        }
+        return count;
+    }
+}
