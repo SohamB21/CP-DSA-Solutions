@@ -1,0 +1,20 @@
+// T.C. = 0(n)      S.C. = O(1)
+public class Solution {
+    public static int longestSubarrayWithSumK(int a[], long k) {
+        // sliding window
+        int i = 0, j = 0, n = a.length, ans = 0;
+        long sum = a[i];
+        while(j < n){
+            while(i<=j && sum>k){
+                sum = sum - a[i];
+                ++i;
+            }
+            if(sum == k)
+                ans = Math.max(ans, (j-i+1));
+            ++j;
+            if(j < n)
+                sum = sum + a[j];
+        }
+        return ans;
+    }
+}
