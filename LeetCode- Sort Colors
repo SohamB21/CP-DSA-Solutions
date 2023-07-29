@@ -1,0 +1,26 @@
+// T.C. = O(n)      S.C. = O(1)     Dutch national flag problem
+class Solution {
+    public void sortColors(int[] nums) {
+        int n = nums.length, left = 0, mid = 0, right = n-1, value, temp;
+        
+        while(mid <= right){
+            value = nums[mid];
+            if(value == 0){ //swap nums[left] nums[mid], increment left and mid
+                temp = nums[left];
+                nums[left] = nums[mid];
+                nums[mid] = temp;
+                left++;
+                mid++;
+            }
+            else if(value == 1){ //increment mid
+                mid++;
+            }
+            else if(value == 2){ //swap nums[mid] nums[right], decrement right
+                temp = nums[right];
+                nums[right] = nums[mid];
+                nums[mid] = temp;
+                right--;
+            }
+        }
+    }
+}
