@@ -1,0 +1,14 @@
+// T.C. = 0(n)      S.C. = O(1)
+class Solution {
+    public int maxProfit(int[] prices) {
+        int i, n = prices.length, minPrice = Integer.MAX_VALUE, profit = 0;
+        for(i=0; i<n; i++){
+            if(prices[i] < minPrice)
+                minPrice = prices[i];
+            
+            if(profit < (prices[i]-minPrice))
+                profit = prices[i]-minPrice;
+        }
+        return profit;
+    }
+}
