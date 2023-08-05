@@ -1,0 +1,34 @@
+// T.C. = O(n)      S.C. = O(n)
+import java.util.Set;
+import java.util.HashSet;
+
+public class Solution {
+    public static int longestSuccessiveElements(int []a) {
+        int n = a.length;
+        if(n==0 || n==1)
+            return n;
+
+        Set<Integer> set = new HashSet<>();
+        int i, start, count, longest = -1;
+        //copying values of a[] to set
+        for(i=0; i<n; i++)
+            set.add(a[i]);
+        
+        //iterating set
+        for(int it : set){
+            //if it is the starting number of sequence
+            if(set.contains(it-1) == false){
+                start = it;
+                count = 1;
+                //find and go to the next successive number
+                while(set.contains(start+1)){
+                    start = start + 1;
+                    count++;
+                }
+                longest = (count>longest) ? count : longest;
+            }
+        }
+
+        return longest;
+    }
+}
