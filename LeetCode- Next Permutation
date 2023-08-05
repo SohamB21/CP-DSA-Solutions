@@ -1,0 +1,40 @@
+// T.C. = O(3n)      S.C. = O(1)
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int i, j, temp, n = nums.length;
+        
+        // find a point where a[i] < a[i+1]
+        for(i=n-2; i>=0; i--){
+            if(nums[i] < nums[i+1])
+                break;
+        }
+        
+        //incase nums is in descending, reverse whole
+        if(i<0){
+            rev(nums, 0, n-1);
+            return;
+        }
+        
+        //find smallest num > a[i] from back and swap them
+        for(j=n-1; j>i; j--){
+            if(nums[j] > nums[i]){
+                temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
+                break;
+            }
+        }
+        
+        //reverse from i+1 to last
+        rev(nums, i+1, n-1);
+    }
+    private void rev(int nums[], int start, int end){
+        int temp;
+        while(start < end){
+            temp = nums[end];
+            nums[end] = nums[start];
+            nums[start] = temp;
+            start++; end--;
+        }
+    } 
+}
