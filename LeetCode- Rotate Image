@@ -1,0 +1,35 @@
+// T.C. = O(n * n)       S.C. = O(1)
+class Solution {
+    public void rotate(int[][] matrix) {
+        //Step1 : transposing the given matrix
+        int i, n = matrix.length;
+        transpose(matrix, n);
+        
+        //Step2 : reversing each rows
+        for(i=0; i<n; i++)
+            reverse(matrix[i], 0, n-1);
+    }
+    
+    //function to transpose a matrix
+    private void transpose(int matrix[][], int n){
+        int i, j, temp;
+        for(i=0; i<n-1; i++){
+            for(j=i+1; j<n; j++){
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+    }
+    
+    //function to reverse each row of a matrix
+    private void reverse(int arr[], int start, int end){
+        int temp;
+        while(start < end){
+            temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;    end--;
+        }
+    }
+}
