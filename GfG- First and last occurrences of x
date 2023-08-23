@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+class GFG
+{
+    ArrayList<Long> find(long arr[], int n, int x)
+    {
+        ArrayList<Long> ans = new ArrayList<Long>();
+        int left= 0, right= n-1, mid;
+        long ansFirst= -1, ansLast= -1;
+        
+        // finding starting point of x
+        while(left <= right){
+            mid = left + (right-left)/2;
+            if(arr[mid] >= x){
+                ansFirst = (arr[mid]==x) ? x : -1;
+                right = mid-1;
+            }
+            else
+                left = mid+1;
+        }
+        ans.add(ansFirst);
+        return ans;
+    }
+}
