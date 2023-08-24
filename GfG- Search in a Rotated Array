@@ -1,0 +1,36 @@
+// T.C. = O(log n)      S.C. = O(1)
+class Solution
+{
+    int search(int arr[], int l, int h, int key)
+    {
+        // l: The starting index, h: The ending index
+        
+        while(l <= h){
+            int mid = l + (h-l)/2;
+            if(arr[mid] == key)
+                return mid;
+            
+            //if left half is sorted
+            else if(arr[l] <= arr[mid]){
+                //present in sorted left half
+                if(arr[l]<=key && key<arr[mid])
+                    h = mid - 1;
+                //present in unsorted right half
+                else
+                    l = mid + 1;
+            }
+            
+            //if right half is sorted
+            else if(arr[mid] < arr[h]){
+                //present in sorted right half
+                if(arr[mid]<key && key<=arr[h])
+                    l = mid + 1;
+                //present in unsorted left half
+                else
+                    h = mid - 1;
+            }
+        }
+        
+        return -1;
+    }
+}
