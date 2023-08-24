@@ -1,0 +1,42 @@
+// T.C. = O(log n)      S.C. = O(1)
+class Solution {
+    public static boolean Search(int N, int arr[], int key) {
+        
+        int l= 0, h= N-1, mid;
+        
+        while(l <= h){
+            mid = l + (h-l)/2;
+            if(arr[mid] == key)
+                return true;
+                
+            //edge case, deadlock situation
+            if(arr[l]==arr[mid] && arr[mid]==arr[h]){
+                l = l+1;
+                h = h-1;
+                continue;
+            }
+            
+            //if left half is sorted
+            if(arr[l] <= arr[mid]){
+                //present in sorted left half
+                if(arr[l]<=key && key<arr[mid])
+                    h = mid - 1;
+                //present in unsorted right half
+                else
+                    l = mid + 1;
+            }
+            
+            //if right half is sorted
+            else if(arr[mid] <= arr[h]){
+                //present in sorted right half
+                if(arr[mid]<key && key<=arr[h])
+                    l = mid + 1;
+                //present in unsorted left half
+                else
+                    h = mid - 1;
+            }
+        }
+        
+        return false;
+    }
+}
