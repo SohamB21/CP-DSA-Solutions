@@ -1,0 +1,32 @@
+// T.C. = O(log n)      S.C. = O(1)
+class Solution 
+{
+    int findOnce(int arr[], int n)
+    {
+        if(n == 1)
+            return arr[0];
+        else if(arr[0] != arr[1])
+            return arr[0];
+        else if(arr[n-1] != arr[n-2])
+            return arr[n-1];
+            
+        int left = 0, right = n-1, mid;
+        while(left <= right){
+            mid = left + (right-left)/2;
+            
+            //if mid is the single element
+            if(arr[mid-1]!=arr[mid] && arr[mid]!=arr[mid+1])
+                return arr[mid];
+            
+            //if left half contains all even pairs
+            if((mid%2 == 1 && arr[mid-1] == arr[mid]) 
+            || (mid%2 == 0 && arr[mid] == arr[mid+1]))
+                left = mid + 1;
+            //if left half doesn't contain all even pairs
+            else
+                right = mid - 1;
+        }
+        
+        return -1;
+    }
+}
