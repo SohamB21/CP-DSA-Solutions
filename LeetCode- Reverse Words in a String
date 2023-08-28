@@ -1,0 +1,29 @@
+// T.C. = O(n)      S.C. = O(n)
+class Solution {
+    public String reverseWords(String s) {
+        if(s.length()==0 || s.length()==1)
+            return s;
+
+        s = s.trim() + " ";
+        int i, n = s.length();
+        String word = "", ans = "";
+        
+        for(i=0; i<n; i++){
+            char ch = s.charAt(i);
+            
+            //character encountered
+            if(ch != ' ')
+                word += ch;
+            
+            //space encountered
+            else if(ch == ' ' && word.isEmpty()==false){
+                if(ans.isEmpty())
+                    ans = word;
+                else
+                    ans = word + " " + ans;
+                word = "";
+            }
+        }
+        return ans;
+    }
+}
