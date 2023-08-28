@@ -1,0 +1,26 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    public String removeOuterParentheses(String s) {
+        int k, start = -1, end = -1, count = 0, n = s.length();
+        String ans = "";
+        
+        for(k=0; k<n; k++){
+            char ch = s.charAt(k);
+            
+            if(ch == '('){
+                if(count == 0)
+                    start = k;
+                count++;
+            }
+            else if(ch == ')'){
+                count--;
+                if(count == 0){
+                    end = k;
+                    ans = ans + s.substring(start+1, end);
+                }
+            }       
+        }
+        
+        return ans;
+    }
+}
