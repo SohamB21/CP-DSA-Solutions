@@ -1,0 +1,17 @@
+// T.C. = O(sLen*sLen)      S.C. = O(1)
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        int sLen = s.length(), goalLen = goal.length();
+        if(sLen != goalLen)
+            return false;
+        
+        String dummy = s;
+        while(sLen-- != 0){
+            dummy = dummy.substring(1) + dummy.charAt(0);
+            if(dummy.equals(goal))
+                return true;
+        }
+        
+        return false;
+    }
+}
