@@ -1,0 +1,33 @@
+// T.C. = O(Total length of the strings)      S.C. = 0(Unique alphabets in s and t)
+// As the unique alphabets can be at max 26, S.C. can be considered as O(1)
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int i, len1 = s.length(), len2 = t.length();
+        if(len1 != len2)
+            return false;
+        
+        Map<Character, Character> sMap = new HashMap<Character, Character>();
+        Map<Character, Character> tMap = new HashMap<Character, Character>();
+
+        for(i=0; i<len1; i++){
+            char sChar = s.charAt(i);
+            char tChar = t.charAt(i);
+            
+            if(sMap.containsKey(sChar)){
+                if(sMap.get(sChar) != tChar)
+                    return false;
+            }
+            else
+                sMap.put(sChar, tChar);
+            
+            if(tMap.containsKey(tChar)){
+                if(tMap.get(tChar) != sChar)
+                    return false;
+            }
+            else
+                tMap.put(tChar, sChar);
+        }
+        
+        return true;
+    }
+}
