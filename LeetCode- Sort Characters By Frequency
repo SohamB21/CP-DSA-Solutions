@@ -1,1 +1,42 @@
-
+// T.C. = O(len * log(k))       S.C. = O(len)
+class Solution {
+    public String frequencySort(String s) {
+        //Step0 -> check validation of input string
+        if(s.length()==0 || s.length()==1)
+            return s;
+        
+        //Step1 -> add frequency of the characters in the map 
+        Map <Character, Integer> map = new HashMap<>();
+        int len = s.length(), i;
+                                
+        for(i=0; i<len; i++){ //T.C.= O(len) & S.C.= O(k)
+            char ch = s.charAt(i);
+            if(map.containsKey(ch))
+                map.put(ch, map.get(ch)+1);
+            else
+                map.put(ch, 1);
+        }
+        
+        //Step2 -> create a max heap to sort frequencies in desc order
+        PriorityQueue<Map.Entry<Character, Integer>> maxHeap = new PriorityQueue<>(
+            (a, b) -> b.getValue() - a.getValue() //Lambda
+        );
+        
+        for(Map.Entry<Character, Integer> entry : map.entrySet()){
+            //if unique characters => k then, T.C.= O(k * log(k)) & S.C.= O(k)
+            maxHeap.offer(entry);
+        }
+        
+        //Step3 -> build the sorted string
+        String ans = "";     
+        while(!maxHeap.isEmpty()){ //T.C.  O(log(k) * len) & S.C.= O(len)
+            Map.Entry<Character, Integer> entry = maxHeap.poll();
+            char ch = entry.getKey();
+            int freq = entry.getValue();
+            for(i=0; i<freq; i++)
+                ans = ans + ch;
+        }
+        
+        return ans;
+    }
+}
