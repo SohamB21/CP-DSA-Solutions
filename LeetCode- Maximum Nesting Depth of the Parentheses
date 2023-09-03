@@ -1,0 +1,24 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    public int maxDepth(String s) {
+        int i, n = s.length(), currentMax = 0, max = 0;
+        
+        for(i=0; i<n; i++){
+            char ch = s.charAt(i);
+            if(ch == '('){
+                currentMax++;
+                max = (max < currentMax) ? currentMax : max;
+            }
+            else if(ch == ')'){
+                if(currentMax > 0)
+                    currentMax--;
+                else
+                    return -1;
+            }
+        }
+        if(currentMax != 0)
+            return -1;
+        else
+            return max;
+    }
+}
