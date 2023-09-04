@@ -1,0 +1,36 @@
+// T.C. = O(len)        S.C. = O(7) ~ O(1)
+class Solution{
+    public int romanToInt(String s){
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        int len = s.length(), right = len - 1, ans = 0;
+
+        while (right >= 0){
+            char current = s.charAt(right);
+
+            if (map.containsKey(current)){
+                int currVal = map.get(current);
+                int nextVal = (right>0) ? map.get(s.charAt(right-1)) : Integer.MAX_VALUE;
+                
+                if (currVal <= nextVal)
+                    ans = ans + currVal;
+                else{
+                    ans = ans + currVal - nextVal;
+                    --right;
+                }
+            }
+            else
+                return -1;
+
+            --right;
+        }
+        return ans;
+    }
+}
