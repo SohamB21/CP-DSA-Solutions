@@ -1,0 +1,30 @@
+// T.C. = O(len)        S.C. = O(1)
+class Solution {
+    public int myAtoi(String s) {
+        if(s.length() == 0)
+            return 0;
+        int len= s.length(), i= 0, ans= 0, sign= 1;
+        
+        //skipping spaces at the beginning, if any
+        while(i<len && s.charAt(i)==' ')
+            i++;
+        
+        //checking for sign, if any
+        if(i<len && (s.charAt(i)=='+' || s.charAt(i)=='-')){
+            sign = (s.charAt(i)=='+') ? 1 : -1;
+            i++;
+        }
+        
+        //checking for numbers in the string and converting them
+        while(i<len && '0'<=s.charAt(i) && s.charAt(i)<='9'){
+            int digit = s.charAt(i)-'0';
+            if((ans > Integer.MAX_VALUE/10) ||
+               (ans == Integer.MAX_VALUE/10 && digit > Integer.MAX_VALUE%10))
+                return sign==1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            ans = ans*10 + digit;
+            i++;
+        }
+        
+        return ans*sign;
+    }
+}
