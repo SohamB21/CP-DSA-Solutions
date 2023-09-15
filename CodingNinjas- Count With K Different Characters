@@ -1,0 +1,26 @@
+// T.C. = O(n*n)		S.C. = O(1)
+public class Solution {
+    public static int countSubStrings(String str, int k) {
+        int i, j, n = str.length(), find = 0;
+
+        for(i=0; i<n; i++){
+            int count = 0;
+        	int cnt[] = new int[26];
+            
+			for(j=i; j<n; j++){
+				//to get index of that character in cnt array
+				int charIndex = str.charAt(j) - 'a';
+
+				if(cnt[charIndex] == 0){
+                    cnt[charIndex]++;
+                    count++;
+                }
+				if(count == k)
+                    find++;
+                else if(count > k)
+                    break;
+			}
+        }
+		return find;
+    }
+}
