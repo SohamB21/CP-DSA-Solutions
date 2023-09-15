@@ -1,0 +1,26 @@
+// T.C. = O(n*n)       S.C. = O(1)
+class Solution{
+    public int beautySum(String s){
+        int i, result = 0, n = s.length();
+        int frequencies[] = new int[26];
+        
+        for(i=0; i<n; i++){
+            frequencies[s.charAt(i) - 'a']++;
+            result += beautyOfSubs(frequencies);
+        }
+        
+        if(n > 1)
+            result += beautySum(s.substring(1));
+        return result;
+    }
+    private int beautyOfSubs(int frequencies[]){
+        int i, max = 0, min = Integer.MAX_VALUE;
+        
+        for(i=0; i<26; i++){
+            max = Math.max(max, frequencies[i]);
+            if(frequencies[i] != 0)
+                min = Math.min(min, frequencies[i]);
+        }
+        return max - min;
+    }
+}
