@@ -1,0 +1,19 @@
+// T.C. = O(pos)        S.C. = O(1)
+class GfG
+{
+    //Function to insert a new node at given position in doubly linked list.
+    void addNode(Node head_ref, int pos, int data)
+	{
+		int i, count = 0;
+		Node temp = head_ref;
+		
+		while(count<pos && temp!=null){
+		    temp = temp.next;
+		    count++;
+		}
+		Node newNode = new Node(data);
+		newNode.next = temp.next;
+		newNode.prev = temp;
+		temp.next = newNode;
+	}
+}
