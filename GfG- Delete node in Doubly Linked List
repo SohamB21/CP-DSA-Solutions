@@ -1,0 +1,28 @@
+// T.C. = 0(x)      S.C. = O(1)
+class Solution{
+    Node deleteNode(Node head, int x){
+        int pos = 1;    
+        Node temp = head;   
+        
+        //traverse to the node to be deleted
+        while(pos<x && temp!=null){
+            temp = temp.next;
+            ++pos;
+        }
+
+        //if prev exists update prev<->next
+        if(temp.prev != null)
+            temp.prev.next = temp.next;
+        //else head is to be deleted
+        else{
+            head = temp.next;
+            head.prev = null;
+        }
+            
+        //if next node exists update next<->prev 
+        if(temp.next != null)
+            temp.next.prev = temp.prev;
+        
+        return head;
+    }
+}
