@@ -1,0 +1,19 @@
+// T.C. = O(n)      S.C. = O(1)
+public static Node reverseDLL(Node head)
+{
+    if(head==null)
+        return head;
+        
+    Node prevNode = null;
+    Node currNode = head;
+    Node nextNode;
+    
+    while(currNode != null){
+        nextNode = currNode.next;
+        currNode.next = prevNode;
+        currNode.prev = nextNode;
+        prevNode = currNode;
+        currNode = nextNode;
+    }
+    return prevNode;
+}
