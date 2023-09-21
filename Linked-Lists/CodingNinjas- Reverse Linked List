@@ -1,0 +1,15 @@
+// T.C. = O(n)       S.C. = O(n)     Recursive Approach
+public class Solution
+{
+    public static Node reverseLinkedList(Node head)
+    {
+        if(head==null || head.next==null)
+            return head;
+        
+        Node newHead = reverseLinkedList(head.next);
+        Node jointHead = head.next;
+        jointHead.next = head;
+        head.next = null;
+        return newHead;
+    }
+}
