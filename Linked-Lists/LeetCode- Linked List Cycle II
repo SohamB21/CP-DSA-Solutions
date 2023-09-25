@@ -1,0 +1,24 @@
+// T.C. = O(n)      S.C. = O(1)     Floyd's Cycle Detection Algorithm
+public class Solution{
+    public ListNode detectCycle(ListNode head){
+        ListNode slow = head, fast = head, ptr = null;
+        
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            //collision point
+            if(slow == fast){
+                ptr = head;
+                //main crux of the algo
+                while(ptr != slow){
+                    ptr = ptr.next;
+                    slow = slow.next;
+                }
+                if(ptr == slow)
+                    return ptr;
+            }
+        }  
+        return null;
+    }
+}
