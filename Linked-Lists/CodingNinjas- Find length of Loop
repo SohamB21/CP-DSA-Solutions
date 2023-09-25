@@ -1,0 +1,30 @@
+// T.C. = O(n+count)        S.C. = O(1)
+public class Solution
+{
+    public static int lengthOfLoop(Node head) {
+        Node slow = head, fast = head;
+        boolean hasLoop = false;
+        int count = 0;
+        
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+            
+            //collision point
+            if(slow == fast){
+                hasLoop = true;
+                count = 1;
+                break;
+            }
+        }
+
+        while(hasLoop){
+            slow = slow.next;
+            if(slow != fast)
+                count++;
+            else
+                break;
+        }
+        return count;
+    }
+}
