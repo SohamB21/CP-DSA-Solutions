@@ -1,0 +1,39 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    private ListNode reverseList(ListNode temp){
+        ListNode prevNode = null;
+        ListNode currNode = temp;
+        ListNode nextNode = null;
+        
+        while(currNode != null){
+            nextNode = currNode.next;
+            currNode.next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        return prevNode;
+    }
+    public boolean isPalindrome(ListNode head){
+        if(head==null || head.next==null)
+            return true;
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while(fast.next!=null && fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        slow.next = reverseList(slow.next);
+        slow = slow.next;
+        ListNode ptr = head;
+
+        while(slow != null){
+            if(ptr.val != slow.val)
+                return false;
+            ptr = ptr.next;
+            slow = slow.next;
+        }
+        return true;
+    }
+}
