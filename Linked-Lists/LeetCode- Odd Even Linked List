@@ -1,0 +1,25 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution{
+    public ListNode oddEvenList(ListNode head){
+        if (head==null || head.next==null)
+            return head;
+
+        ListNode oddHead = head, evenHead = head.next;
+        ListNode currOdd = oddHead, currEven = evenHead;
+        ListNode nextOdd= null, nextEven= null;
+
+        while(currOdd!=null && currOdd.next!=null && currEven!=null && currEven.next!=null){
+            nextOdd = currOdd.next.next;
+            currOdd.next = nextOdd;
+            currOdd = nextOdd;
+
+            nextEven = currEven.next.next;
+            currEven.next = nextEven;
+            currEven = nextEven;
+        }
+
+        //connecting last odd node to first even node
+        currOdd.next = evenHead;
+        return oddHead;
+    }
+}
