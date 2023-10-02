@@ -1,0 +1,28 @@
+// T.C. = O(n)      S.C. = O(1)
+public class Solution{
+    public static Node removeKthNode(Node head, int K){
+
+        if(head==null || K==0)
+            return head;
+
+        Node slow = head;
+        Node fast = head;
+
+        //move the fast pointer K nodes ahead
+        for(int i=0; i<K; i++){
+            if (fast.next == null)
+                return head.next;
+            else
+                fast = fast.next;
+        }
+
+        //move both so that slow points to node just before the Kth node
+        while(fast.next != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        slow.next = slow.next.next;
+        return head;
+    }
+}
