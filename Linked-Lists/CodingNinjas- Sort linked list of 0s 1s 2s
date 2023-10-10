@@ -1,0 +1,42 @@
+// T.C. = O(n)      S.C. = O(1)
+public class Solution
+{
+    public static Node sortList(Node head) {
+        if(head==null || head.next==null)
+            return head;
+
+        Node zeroList = new Node();
+        Node oneList = new Node();
+        Node twoList = new Node();
+
+        Node zeroPtr = zeroList;
+        Node onePtr = oneList;
+        Node twoPtr = twoList;
+
+        Node curr = head;
+
+        while(curr != null){
+            if(curr.data == 0){
+                zeroPtr.next = curr;
+                zeroPtr = zeroPtr.next;
+                curr = curr.next;
+            }
+            else if(curr.data == 1){
+                onePtr.next = curr;
+                onePtr = onePtr.next;
+                curr = curr.next;
+            }
+            else if(curr.data == 2){
+                twoPtr.next = curr;
+                twoPtr = twoPtr.next;
+                curr = curr.next;
+            }
+        }
+        zeroPtr.next = (oneList.next!=null) ? oneList.next : twoList.next;
+        onePtr.next = twoList.next;
+        twoPtr.next = null;
+
+        head = zeroList.next;
+        return head;
+    }
+}
