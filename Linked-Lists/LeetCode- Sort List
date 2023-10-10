@@ -1,0 +1,52 @@
+// T.C. = O(n * logn)       S.C. = O(n)
+class Solution {
+  public ListNode sortList(ListNode head){
+    if(head==null || head.next==null)
+      return head;
+        
+    ListNode prev = null; 
+    ListNode slow = head; 
+    ListNode fast = head;
+    
+    // step 1. find mid of list
+    while(fast!=null && fast.next!=null){
+      prev = slow;
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    prev.next = null; // to cut the list into 2 halves
+    
+    // step 2. sort each half
+    ListNode list1 = sortList(head);
+    ListNode list2 = sortList(slow);
+
+    // step 3. merge list1 and list2
+    return merge(list1, list2);
+  }
+  
+  private ListNode merge(ListNode list1, ListNode list2){
+    ListNode dummy = new ListNode(0);
+    ListNode current = dummy;
+    
+    while(list1!=null && list2!=null){
+      if(list1.val < list2.val){
+        current.next = list1;
+        list1 = list1.next;
+      }
+      else{
+        current.next = list2;
+        list2 = list2.next;
+      }
+      current = current.next;
+    }
+    current.next = null; // to set next of last node to null
+    
+    // add remaining lists
+    if(list1 != null)
+      current.next = list1;
+    if(list2 != null)
+      current.next = list2;
+    
+    return dummy.next;
+  }
+}
