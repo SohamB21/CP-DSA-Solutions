@@ -1,0 +1,20 @@
+// T.C. = O(lenA + len B)       S.C. = O(1)
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA==null || headB==null)
+            return null;
+
+        ListNode currA = headA;
+        ListNode currB = headB;
+
+        while(currA != currB){
+            currA = (currA == null) ? headB : currA.next;
+            currB = (currB == null) ? headA : currB.next;
+            
+            // If both lists reach the end without an intersection
+            if(currA==null && currB==null)
+                return null;
+        }
+        return currA;
+    }
+}
