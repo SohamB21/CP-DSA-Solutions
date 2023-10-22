@@ -1,0 +1,23 @@
+// T.C. = O(n)      S.C. = O(1)
+public class Solution {
+    public static Node deleteAllOccurrences(Node head, int k) {
+        Node ptr = head;
+        while(ptr != null){
+            if(ptr.data == k){
+                if(ptr == head){ //head deletion
+                    head = ptr.next;
+                }
+                else if(ptr.next == null){ //tail deletion
+                    ptr.prev.next = null;
+                    ptr.prev = null;
+                }
+                else{ //middle deletion
+                    ptr.prev.next =  ptr.next;
+                    ptr.next.prev = ptr.prev;
+                }
+            }
+            ptr = ptr.next;
+        }
+        return head;
+    }
+}
