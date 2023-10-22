@@ -1,0 +1,31 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+        if(head==null || head.next==null)
+            return ans;
+
+        Node left = head, temp = head, right = head;
+        
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        right = temp;
+        
+        while(left.data < right.data){
+            if((left.data + right.data) == target){
+                ArrayList<Integer> pairs = new ArrayList<Integer>();
+                pairs.add(left.data);
+                pairs.add(right.data);
+                ans.add(pairs);
+                left = left.next;
+                right = right.prev;
+            }
+            else if((left.data + right.data) < target)
+                left = left.next;
+            else if((left.data + right.data) > target)
+                right = right.prev;
+        }
+        return ans;
+    }
+}
