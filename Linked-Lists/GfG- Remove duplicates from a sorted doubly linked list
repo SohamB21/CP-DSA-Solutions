@@ -1,0 +1,25 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution{
+    Node removeDuplicates(Node head){
+        if(head==null)
+            return head;
+
+        Node current = head;
+        Node prevFlag = null;
+
+        while(current != null){
+            if(prevFlag == null)
+                prevFlag = current;
+            else if(prevFlag.data != current.data){
+                prevFlag.next = current;
+                current.prev = prevFlag;
+                prevFlag = current;
+            }
+            current = current.next;
+        }
+        if(prevFlag != null)
+            prevFlag.next = null;
+            
+        return head; 
+    }
+}
