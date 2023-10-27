@@ -1,0 +1,33 @@
+// T.C. = O(n)      S.C. = O(1)
+class Solution {
+    public ListNode rotateRight(ListNode head, int k){
+        // base case
+        if(k==0 || head==null || head.next==null)
+            return head;
+        
+        // counting no.of nodes
+        ListNode last = head;
+        int n = 1;
+        while(last.next != null){
+            n++;
+            last = last.next;
+        }
+        
+        // calculating breakpoint
+        k = k % n;
+        if(k == 0) // no need to rotate
+            return head;  
+        int breakpoint = n - k;
+        
+        // finding breakpoint node
+        ListNode breakingNode = head;
+        for (int i=1; i<breakpoint; i++) 
+            breakingNode = breakingNode.next;
+        
+        // linking all the nodes
+        ListNode newHead = breakingNode.next;
+        last.next = head;
+        breakingNode.next = null;
+        return newHead;
+    }
+}
