@@ -1,0 +1,37 @@
+// T.C. = O(N*N*M)      S.C. = O(N*M)
+public class Solution {
+    private static Node mergeLists(Node l1, Node l2){
+        Node temp = new Node();
+        Node mergedList = temp;
+
+        while(l1!=null && l2!=null){
+            if(l1.data < l2.data){
+                temp.child = l1;
+                l1 = l1.child;
+            }
+            else{
+                temp.child = l2;
+                l2 = l2.child;
+            }
+            // Move the pointer to the last node in the merged list
+            temp = temp.child; 
+        }
+
+        // Connect the remaining elements, if any
+        if(l1 != null)
+            temp.child = l1;
+        else
+            temp.child = l2;
+        return mergedList.child;
+    }
+    public static Node flattenLinkedList(Node head) {
+        if(head==null || head.next==null)
+            return head;
+        // Recursively flatten the next node
+        head.next = flattenLinkedList(head.next);
+        // Merge the current list with the flattened next list
+        head = mergeLists(head, head.next);
+
+        return head;
+    }
+}
