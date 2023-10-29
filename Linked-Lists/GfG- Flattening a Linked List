@@ -1,0 +1,40 @@
+// T.C. = O(N*N*M)      S.C. = O(N)
+class GfG
+{
+    private Node mergeLists(Node l1, Node l2){
+        Node temp = new Node(0);
+        Node mergedList = temp;
+
+        while(l1!=null && l2!=null){
+            if(l1.data < l2.data){
+                temp.bottom = l1;
+                l1 = l1.bottom;
+            }
+            else{
+                temp.bottom = l2;
+                l2 = l2.bottom;
+            }
+            // Move the pointer to the last node in the merged list
+            temp = temp.bottom; 
+        }
+
+        // Connect the remaining elements, if any
+        if(l1 != null)
+            temp.bottom = l1;
+        else
+            temp.bottom = l2;
+        return mergedList.bottom;
+    }
+    Node flatten(Node root)
+    {
+    	if(root==null || root.next==null)
+            return root;
+            
+        // Recursively flatten the next node
+        root.next = flatten(root.next);
+        // Merge the current list with the flattened next list
+        root = mergeLists(root, root.next);
+
+        return root;
+    }
+}
