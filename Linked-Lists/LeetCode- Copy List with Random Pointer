@@ -1,0 +1,61 @@
+// T.C. = O(N)      S.C. = O(N)
+class Solution {
+    public Node copyRandomList(Node head) {
+        // clone the list without random pointers
+        Node cloneHead = null;
+        Node cloneTail = null;
+        
+        Node temp = head;
+        while(temp != null){
+            Node newNode = new Node(temp.val);
+            if(cloneHead==null && cloneTail==null){
+                cloneHead = newNode;
+                cloneTail = newNode;
+            }
+            else{
+                cloneTail.next = newNode;
+                cloneTail = cloneTail.next;
+            }
+            temp = temp.next;
+        }
+        
+        // insert clone nodes after original nodes
+        Node originalNode = head;
+        Node cloneNode = cloneHead;
+        while(originalNode!=null && cloneNode!=null){
+            Node next = originalNode.next;
+            originalNode.next = cloneNode;
+            originalNode = next;
+            
+            next = cloneNode.next;
+            cloneNode.next = originalNode;
+            cloneNode = next;
+        }
+        
+        // give clone nodes their random nodes
+        temp = head;
+        while(temp != null){
+            if(temp.next != null){
+                if(temp.random != null)
+                    temp.next.random = temp.random.next;
+                else
+                    temp.next.random = temp.random;
+            }
+            temp = temp.next.next;
+        }
+        
+        // get the clone list back
+        originalNode = head;
+        cloneNode = cloneHead;
+        while(originalNode!=null && cloneNode!=null){
+            originalNode.next = cloneNode.next;
+            originalNode = originalNode.next;
+            
+            if(originalNode != null){
+                cloneNode.next = originalNode.next;
+                cloneNode = cloneNode.next;
+            }
+        }
+        return cloneHead;
+    }
+}
